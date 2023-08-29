@@ -1,0 +1,44 @@
+<div class="text-gray-500 p-5 text-xs lg:text-sm border-r border-gray-900
+overflow-y-scroll scrollbar-hide h-screen sm:max-w-[12rem] lg:max-w-[15rem]
+hidden md:inline-flex pb-36">
+    <div class="space-y-4">
+
+        <button routerLink="/" class="flex items-center space-x-4 hover:text-white">
+        <home-outline-icon class="w-5 h-5"></home-outline-icon>
+            <p>Home</p>
+        </button>
+    
+        <button class="flex items-center space-x-4 hover:text-white">
+            <magnifying-glass-circle-outline-icon class="w-5 h-5"></magnifying-glass-circle-outline-icon>
+            <p>Search</p>
+        </button>
+    
+        <button class="flex items-center space-x-4 hover:text-white">
+            <building-library-outline-icon class="w-5 h-5"></building-library-outline-icon>
+            <p>Your library</p>
+        </button>
+        <hr class="border-t-[0.1px] border-gray-900"/>
+
+        <button class="flex items-center space-x-4 hover:text-white">
+            <plus-outline-icon class="w-5 h-5"></plus-outline-icon>
+                <p>Create Playlist</p>
+            </button>
+        
+            <button class="flex items-center space-x-4 hover:text-white">
+                <video-camera-outline-icon class="w-5 h-5 "></video-camera-outline-icon>
+                <p>Your Episodes</p>
+            </button>
+        
+            <button class="flex items-center space-x-4 hover:text-white text-blue-700">
+                <heart-solid-icon class="w-5 h-5"></heart-solid-icon>
+                <p>Liked Songs</p>
+            </button>
+            <hr class="border-t-[0.1px] border-gray-900"/>
+
+
+            <p class="cursor-pointer hover:text-white" 
+            *ngFor="let playlist of playlists" 
+            (click)="showPlaylistId(playlist.id)">{{ playlist.name }}</p>
+
+    </div>
+</div>

@@ -1,0 +1,20 @@
+
+<div class="flex flex-col">
+    <hr class="pl-8 pr-8 border-t-[1px] border-gray-900"/>
+
+    <div class="flex flex-row items-center pb-3">
+        <magnifying-glass-outline-icon class="w-7 h-7 pr-3"></magnifying-glass-outline-icon>
+        <input class="peer h-full w-full border-b border-gray-700
+        bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 
+        outline outline-0 transition-all placeholder-shown:border-blue-gray-200 
+        focus:border-green-600 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" 
+        type="text" placeholder=" Search..."/>
+
+    </div>
+
+    <app-song-card (click)="onSelectTrack(song?.track.uri, song?.track.id)" class="" 
+    *ngFor="let song of songsOfCurrentPlaylist?.tracks?.items; 
+    let index = index" [index]="index" [song]="song?.track">
+    </app-song-card>
+
+</div>
