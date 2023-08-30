@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environments } from 'src/environments/environments';
-import { Buffer } from 'buffer';
 
 @Injectable({
   providedIn: 'root'
@@ -60,7 +59,7 @@ export class AuthService {
       const hash = window.location.hash
       if (hash) {
         const access_token = hash.substring(1).split("&")[0].split("=")[1];
-        console.log(access_token);
+        //console.log(access_token);
         localStorage.setItem('access_token', access_token);
         this.loggedIn = true;
       }

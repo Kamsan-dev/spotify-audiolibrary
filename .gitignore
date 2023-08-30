@@ -43,3 +43,6 @@ Thumbs.db
 
 .env.*
 /src/environments
+
+#images
+/src/assets

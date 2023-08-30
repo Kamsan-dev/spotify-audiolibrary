@@ -1,5 +1,7 @@
 <div class="flex-grow h-screen overflow-y-scroll scrollbar-hide">
     
+
+    <!-- User Icon -->
     <header class="absolute top-5 right-8" (click)="signOut()">
         <div class="flex items-center space-x-3 bg-black text-white
         opacity-90 hover:opacity-80 cursor-pointer rounded-full p-1 pr-2">
@@ -10,6 +12,7 @@
         </div>
     </header>
 
+    <!-- Playlist Logo && Playlist Name -->
     <section class="flex items-end space-x-7 bg-gradient-to-b to-black
         {{color}} h-80 text-white p-8">
 
@@ -24,6 +27,7 @@
         </div>
     </section>
 
+    <!-- List of songs -->
     <app-songs class="px-8 flex flex-col space-y-1 pb-28 text-white" [songsOfCurrentPlaylist]="playlist"></app-songs>
     
 </div>

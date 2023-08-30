@@ -49,7 +49,7 @@ export class CenterComponent implements OnInit {
     /* Obtain the current playlist id & its tracks */
     this.spotifyService.currentPlaylistId.subscribe((value: string) => {
       this.playlistId = value;
-      console.log(value);
+      console.log("current playlist id : " + value);
       this.color = shuffle(this.colors).pop();
 
       if (this.playlistId !=('')){
