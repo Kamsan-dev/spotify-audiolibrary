@@ -13,18 +13,18 @@ This project uses :
 
 ## Spotify Web API
 <p align="center">
-    <img src="./src/assets/4.png" alt="MarineGEO circle logo" style="height: 400px; width:500px;"/>
+    <img src="./src/assets/4.png" alt="" style="height: 400px; width:500px;"/>
 </p>
 
 ## Connexion to Spotify Accounts Service
 <p align="center">
-    <img src="./src/assets/1.png" alt="MarineGEO circle logo" style="height: 400px; width:500px;"/>
+    <img src="./src/assets/1.png" alt="" style="height: 400px; width:500px;"/>
 </p>
 
 ## Application Images
 
 <p align="center">
-    <img src="./src/assets/2.png" alt="MarineGEO circle logo"/>
-    <img src="./src/assets/3.png" alt="MarineGEO circle logo"/>
+    <img src="./src/assets/2.png" alt=""/>
+    <img src="./src/assets/3.png" alt=""/>
 </p>
 
