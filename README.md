@@ -24,7 +24,7 @@ This project uses :
 ## Application Images
 
 <p align="center">
-    <img src="./src/assets/2.png" alt=""/>
-    <img src="./src/assets/3.png" alt=""/>
+    <img src="./src/assets/2.PNG" alt=""/>
+    <img src="./src/assets/3.PNG" alt=""/>
 </p>
 
