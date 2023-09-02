@@ -21,6 +21,10 @@ export class PlayerComponent implements OnInit{
   volume: number = 50;
   progress_ms: number = 0;
 
+  playerState: any;
+  songProgressValue : number = 0;
+
+
   constructor(private spotifyService: SpotifyService, private httpClient: HttpClient) { 
 
     effect(() => {
@@ -32,13 +36,28 @@ export class PlayerComponent implements OnInit{
 
   ngOnInit(): void {
 
+    let playerStateInterval = () => setInterval(() => {
+      this.spotifyService.getCurrentlyPlayingTrack().subscribe((player) => {
+        if (player != null){
+         this.playerState = player;
+         console.log(this.playerState);
+         this.spotifyService.setIsPlaying(this.playerState.is_playing);
+        }
+      });
+
+      this.getSongProgress();
+    }, 500);
+
+    playerStateInterval();
+
+
+
     if (localStorage.getItem('trackId') != null || localStorage.getItem('trackId')!= undefined) {
       this.spotifyService.setTrackId(localStorage.getItem('trackId')!);
       this.spotifyService.getSongInfo().subscribe((response) => {
         console.log(response);
         this.songInfo = response;
         this.spotifyService.currentTrackInfo.next(response);
-        //localStorage.removeItem('trackId');
       });
     }
 
@@ -71,13 +90,38 @@ export class PlayerComponent implements OnInit{
 
       if (!(response['is_playing'])){
         this.spotifyService.playSong(this.progress_ms);
-        this.spotifyService.setIsPlaying(true);
+        //this.spotifyService.setIsPlaying(true);
       } else {
         console.log("pause click");
-        this.spotifyService.setIsPlaying(false);
+        //this.spotifyService.setIsPlaying(false);
         this.spotifyService.pauseSong().subscribe();
       }
-      //this.spotifyService.pauseSong();
     });
+  }
+
+  getSongProgress(): void {
+
+    if (this.playerState != null || this.playerState != undefined){
+      if (!this.playerState.is_playing && this.progress_ms == 0) {
+        this.songProgressValue = 0;
+      }
+      else {
+        let percent = Math.trunc((this.playerState.progress_ms / this.playerState.item.duration_ms)* 100);
+        if (!Number.isNaN(percent)){
+          this.songProgressValue = percent;
+        } else this.songProgressValue = 0;
+      }
+    }
+  }
+
+  OnProgressBarChange() : void {
+    this.progress_ms = (this.songProgressValue * this.playerState.item.duration_ms) / 100;
+    const debonce = debounce(() => {
+      console.log('progress bar ' + this.progress_ms + ' ms');  
+      this.spotifyService.playSong(this.progress_ms);
+      this.spotifyService.setIsPlaying(true);
+      this.getSongProgress();
+    }, 400);
+    debonce();
   }
 }

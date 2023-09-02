@@ -59,6 +59,10 @@ export class SpotifyService {
     return this.httpClient.get('https://api.spotify.com/v1/me/player', this.getHeaders());
   }
 
+  getCurrentlyPlayingTrack() : Observable<any> {
+    return this.httpClient.get('https://api.spotify.com/v1/me/player/currently-playing', this.getHeaders())
+   }
+
   pauseSong(): Observable<any> {
     return this.httpClient.put('https://api.spotify.com/v1/me/player/pause', {}, this.getHeaders());
   }
@@ -66,6 +70,7 @@ export class SpotifyService {
   setPlaybackVolume(volume: number): Observable<any> {
     return this.httpClient.put('https://api.spotify.com/v1/me/player/volume?volume_percent='+volume, {}, this.getHeaders());
   }
+  
 
   /* PLAYER METHODS */
 

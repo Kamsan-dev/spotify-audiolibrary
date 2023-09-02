@@ -13,35 +13,47 @@ grid grid-cols-2 md:grid-cols-3 text-xs md:text-base px-2 md:px-8">
 
 
         <!-- CENTER -->
-        <div class="flex items-center justify-evenly">
 
-            <arrows-right-left-solid-icon class="buttonPlayer"></arrows-right-left-solid-icon>
-            <backward-solid-icon class="buttonPlayer"></backward-solid-icon>
+        <div class="items-center space-y-4">
+            
+            <div class="flex justify-evenly pt-4">
 
-            <svg *ngIf="!songPlaying; else pause" class="buttonPlayer w-10 h-10" (click)="handlePlayPause()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path fill-rule="evenodd" 
-                d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm14.024-.983a1.125 1.125 0 010 1.966l-5.603 3.113A1.125 1.125 0 019 15.113V8.887c0-.857.921-1.4 1.671-.983l5.603 3.113z" clip-rule="evenodd" />
-            </svg>
+                <arrows-right-left-solid-icon class="buttonPlayer pt-3"></arrows-right-left-solid-icon>
+                <backward-solid-icon class="buttonPlayer pt-3"></backward-solid-icon>
     
-            <!-- <play-circle-solid-icon *ngIf="!songPlaying; else pause" class="buttonPlayer" (click)="handlePlayPause()"></play-circle-solid-icon> -->
-                
-            <ng-template #pause>
-                <svg class="buttonPlayer w-10 h-10" (click)="handlePlayPause()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                    <path fill-rule="evenodd"
-                     d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zM9 8.25a.75.75 0 00-.75.75v6c0 .414.336.75.75.75h.75a.75.75 0 00.75-.75V9a.75.75 0 00-.75-.75H9zm5.25 0a.75.75 0 00-.75.75v6c0 .414.336.75.75.75H15a.75.75 0 00.75-.75V9a.75.75 0 00-.75-.75h-.75z" clip-rule="evenodd" />
-                </svg>
-            </ng-template>
+                <div *ngIf="!songPlaying; else pause">
+                    <svg class="buttonPlayer w-10 h-10" (click)="handlePlayPause()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" 
+                        d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm14.024-.983a1.125 1.125 0 010 1.966l-5.603 3.113A1.125 1.125 0 019 15.113V8.887c0-.857.921-1.4 1.671-.983l5.603 3.113z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+             
+                <ng-template #pause>
+                    <svg class="buttonPlayer w-10 h-10" (click)="handlePlayPause()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd"
+                         d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zM9 8.25a.75.75 0 00-.75.75v6c0 .414.336.75.75.75h.75a.75.75 0 00.75-.75V9a.75.75 0 00-.75-.75H9zm5.25 0a.75.75 0 00-.75.75v6c0 .414.336.75.75.75H15a.75.75 0 00.75-.75V9a.75.75 0 00-.75-.75h-.75z" clip-rule="evenodd" />
+                    </svg>
+                </ng-template>
+    
+                <forward-solid-icon class="buttonPlayer pt-3"></forward-solid-icon>
+                <arrow-uturn-left-solid-icon class="buttonPlayer pt-3"></arrow-uturn-left-solid-icon>
+            </div>
 
-            <forward-solid-icon class="buttonPlayer"></forward-solid-icon>
-            <arrow-uturn-left-solid-icon class="buttonPlayer"></arrow-uturn-left-solid-icon>
+            <div class="">
+                <input type="range" class="w-full" min="0" max="100" striped="true" 
+                [(ngModel)]="songProgressValue" (change)="OnProgressBarChange()" />
+            </div>
+               
+
         </div>
+        
 
 
         <!-- RIGHT SIDE  -->
 
         <div class="flex items-center justify-end space-x-3 md:space-x-3 pr-5">
             <speaker-wave-solid-icon class="buttonPlayer"></speaker-wave-solid-icon>
-            <input type="range" min="0" max="100" name="volume" [(ngModel)] = "volume" (change)="setVolume()" step="3" />
+            <input type="range" min="0" max="100" name="volume" [(ngModel)]="volume" (change)="setVolume()" step="3" />
         </div>
 
 </div>
