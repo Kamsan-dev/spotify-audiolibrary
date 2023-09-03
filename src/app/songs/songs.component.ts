@@ -30,5 +30,4 @@ export class SongsComponent implements OnInit{
     this.spotifyService.setTrackURI(trackURI);
     this.spotifyService.playSong();
   }
-
 }

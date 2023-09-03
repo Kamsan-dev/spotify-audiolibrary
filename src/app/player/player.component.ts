@@ -5,11 +5,12 @@ import { NgHeroiconsModule } from '@dimaslz/ng-heroicons';
 import { HttpClient} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { debounce } from 'lodash';
+import { DurationFormatPipe } from '../pipes/duration-format.pipe';
 
 @Component({
   selector: 'app-player',
   standalone: true,
-  imports: [CommonModule, NgHeroiconsModule, FormsModule],
+  imports: [CommonModule, NgHeroiconsModule, FormsModule, DurationFormatPipe],
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.css']
 })
@@ -40,12 +41,11 @@ export class PlayerComponent implements OnInit{
       this.spotifyService.getCurrentlyPlayingTrack().subscribe((player) => {
         if (player != null){
          this.playerState = player;
-         console.log(this.playerState);
-         this.spotifyService.setIsPlaying(this.playerState.is_playing);
+         this.progress_ms = this.playerState.progress_ms;
+         this.spotifyService.setTrackURI(this.playerState.item.uri);
+         this.getSongProgress();
         }
       });
-
-      this.getSongProgress();
     }, 500);
 
     playerStateInterval();
@@ -90,10 +90,10 @@ export class PlayerComponent implements OnInit{
 
       if (!(response['is_playing'])){
         this.spotifyService.playSong(this.progress_ms);
-        //this.spotifyService.setIsPlaying(true);
+        this.spotifyService.setIsPlaying(true);
       } else {
         console.log("pause click");
-        //this.spotifyService.setIsPlaying(false);
+        this.spotifyService.setIsPlaying(false);
         this.spotifyService.pauseSong().subscribe();
       }
     });
@@ -114,14 +114,17 @@ export class PlayerComponent implements OnInit{
     }
   }
 
-  OnProgressBarChange() : void {
+  onProgressBarChange() : void {
     this.progress_ms = (this.songProgressValue * this.playerState.item.duration_ms) / 100;
-    const debonce = debounce(() => {
-      console.log('progress bar ' + this.progress_ms + ' ms');  
-      this.spotifyService.playSong(this.progress_ms);
-      this.spotifyService.setIsPlaying(true);
-      this.getSongProgress();
-    }, 400);
-    debonce();
+    // const debonce = debounce(() => {
+    //   console.log('progress bar ' + this.progress_ms + ' ms');  
+    //   this.spotifyService.playSong(this.progress_ms);
+    //   this.spotifyService.setIsPlaying(true);
+    //   this.getSongProgress();
+    // }, 400);
+    //debonce();
+    this.spotifyService.playSong(this.progress_ms);
+    this.spotifyService.setIsPlaying(true);
+    this.getSongProgress();
   }
 }
